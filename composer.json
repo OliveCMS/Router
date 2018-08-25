@@ -1,0 +1,21 @@
+{
+  "name": "olive-cms/router",
+  "description": "OliveCMS Router with host handle",
+  "type": "library",
+  "keywords": ["Router", "Olive", "OliveCMS"],
+  "require": {
+    "php": ">=5.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Olive\\": "src/"
+    }
+  },
+  "license": "MIT",
+  "authors": [{
+    "name": "Mehdi HosseinZade",
+    "email": "arshen@outlook.com",
+    "homepage": "https://arshen.ir",
+    "role": "Developer"
+  }]
+}
