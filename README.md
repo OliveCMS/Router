@@ -24,12 +24,12 @@ $router->addHost('https://blog.arshen.ir/', 2);
 
 // global route
 $router->add('/api', function(){
-  return 'api area!'
+  return 'api area!';
 });
 
 // host 1 (https://arshen.ir/) route
 $router->add('/login', function(){
-  return 'login area! only use in https://arshen.ir/'
+  return 'login area! only use in https://arshen.ir/';
 }, [], 1);
 
 // not found route

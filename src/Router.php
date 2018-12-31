@@ -1,6 +1,8 @@
 <?php
 namespace Olive;
 
+use Olive\Tools;
+
 class Router
 {
     protected $hosts = [];
@@ -103,27 +105,6 @@ class Router
     {
         if (isset($this->notFoundPatern[$id])) {
             unset($this->notFoundPatern[$id]);
-        }
-    }
-
-    public function runCaller($call, $args)
-    {
-        if (is_string($call)) {
-            if (function_exists($call)) {
-                return call_user_func_array($call, $args);
-            } else {
-                return $call;
-            }
-        } elseif (is_array($call) and count($call) == 2) {
-            $class = $call[0];
-            $method = $call[2];
-            if (class_exists($class)) {
-                if (method_exists($class, $method)) {
-                    return call_user_func_array([$class, $method], $args);
-                }
-            }
-        } elseif (is_callable($call)) {
-            return call_user_func_array($call, $args);
         }
     }
 
@@ -244,7 +225,7 @@ class Router
             foreach ($this->patern as $id => $paterns) {
                 foreach ($paterns as $patern => $data) {
                     if (($id == '*' or (! is_null($rhid) and $rhid == $id)) and $this->validRequest($patern, $rhreq)) {
-                        return $this->runCaller($data['call'], array_merge($data['point'], $this->lastArgs));
+                        return Tools::runCaller($data['call'], array_merge($data['point'], $this->lastArgs));
                     }
                 }
             }
@@ -259,7 +240,7 @@ class Router
                 $nfp = $this->notFoundPatern['*'];
             }
             if ($f == true) {
-                return $this->runCaller($nfp['call'], $nfp['point']);
+                return Tools::runCaller($nfp['call'], $nfp['point']);
             }
         }
     }
